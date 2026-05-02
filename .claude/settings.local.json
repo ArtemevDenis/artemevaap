@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(brew install:*)",
+      "Bash(pdftoppm -v)",
+      "Bash(pdftotext:*)",
+      "Bash(pdfinfo:*)",
+      "Bash(mkdir -p /Users/annaartemeva/WebstormProjects/Self/artemevaaap/pdf_pages)",
+      "Bash(pdftoppm -png -r 150 \"/Users/annaartemeva/WebstormProjects/Self/artemevaaap/Портфолио_с_отзывами_Артемьева_Анна.pdf\" /Users/annaartemeva/WebstormProjects/Self/artemevaaap/pdf_pages/page)",
+      "Bash(open:*)"
+    ]
+  }
+}
