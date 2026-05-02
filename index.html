@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Анна Артемьева — Project Manager / Digital</title>
+  <meta name="description" content="Анна Артемьева — Project Manager в Digital. 5+ лет опыта. Веду проекты от брифа до цифр.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F4F0EB;
+      --bg-olive: #A09A5C;
+      --bg-green: #E1EBCF;
+      --text-dark: #1A1A1A;
+      --text-muted: #5A5A5A;
+      --text-light: #F4F0EB;
+      --accent: #2F3C3A;
+      --border: #D0CBBE;
+      --card-bg: #FAFAF6;
+      --serif: 'Playfair Display', 'Georgia', serif;
+      --sans: 'Inter', 'Helvetica Neue', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(244, 240, 235, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .nav.scrolled { border-bottom-color: var(--border); }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-dark); }
+    .lang-switch {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: none;
+      border: 1px solid var(--accent);
+      padding: 4px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-switch:hover { background: var(--accent); color: var(--text-light); }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-dark);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* CONTAINER */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-text h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .hero-subtitle {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .hero-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hero-contacts a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .hero-contacts a:hover { border-color: var(--accent); background: #fff; }
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-arrow {
+      width: 220px;
+      height: 220px;
+      color: var(--accent);
+    }
+
+    /* SECTION COMMON */
+    section { padding: 100px 0; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 48px;
+    }
+
+    /* CASES */
+    .cases { padding-bottom: 40px; }
+    .case-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 32px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--card-bg);
+    }
+    .case-card.olive .case-left { background: var(--bg-olive); color: #fff; }
+    .case-card.olive .case-left .case-tag { border-color: rgba(255,255,255,0.4); color: #fff; }
+    .case-card.green .case-left { background: var(--bg-green); color: var(--text-dark); }
+
+    .case-left {
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .case-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+    .case-card-title {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .case-company {
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+    .case-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .case-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .case-right {
+      padding: 48px 40px;
+    }
+    .case-section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+    .case-section-label:first-child { margin-top: 0; }
+    .case-right p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .case-metrics {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .metric {
+      text-align: center;
+    }
+    .metric-value {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+    .metric-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+    .case-result {
+      margin-top: 20px;
+      padding: 16px 20px;
+      background: rgba(0,0,0,0.03);
+      border-radius: 8px;
+      border-left: 3px solid var(--bg-olive);
+    }
+    .case-result p {
+      font-size: 0.88rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    /* REVIEWS */
+    .reviews { background: var(--bg); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 36px;
+      border: 1px solid var(--border);
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .review-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .review-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .review-role {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .review-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+    .review-text strong {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+    .review-category {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bg-olive);
+      margin-bottom: 12px;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 80px 0 100px;
+    }
+    .cta-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .cta-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .cta-btn.primary { background: var(--accent); color: #fff; }
+    .cta-btn.secondary { background: var(--card-bg); color: var(--text-dark); border: 1px solid var(--border); }
+
+    /* FOOTER */
+    .footer {
+      padding: 24px 40px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .nav { padding: 14px 20px; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--bg);
+        padding: 20px;
+        gap: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { display: flex; }
+      .burger { display: flex; }
+      .container { padding: 0 20px; }
+      .hero { min-height: auto; padding: 120px 0 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hero-visual { display: none; }
+      .case-card { grid-template-columns: 1fr; }
+      .case-metrics { flex-wrap: wrap; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-text h1 { font-size: 2.6rem; }
+      .hero-contacts { flex-direction: column; }
+      .hero-contacts a { justify-content: center; }
+      .case-left, .case-right { padding: 28px 24px; }
+      .review-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">А. Артемьева</a>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#cases" data-ru="Кейсы" data-en="Cases">Кейсы</a>
+      <a href="#reviews" data-ru="Отзывы" data-en="Reviews">Отзывы</a>
+      <a href="#contact" data-ru="Контакты" data-en="Contact">Контакты</a>
+      <button class="lang-switch" id="langSwitch">EN</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text fade-in">
+          <h1 data-ru="Анна&#10;Артемьева" data-en="Anna&#10;Artemyeva">Анна<br>Артемьева</h1>
+          <p class="hero-subtitle">Project Manager &middot; Digital</p>
+          <p class="hero-desc" data-ru="5+ лет в digital. Веду проекты от брифа до цифр." data-en="5+ years in digital. Managing projects from brief to metrics.">5+ лет в digital. Веду проекты от брифа до цифр.</p>
+          <div class="hero-contacts">
+            <a href="mailto:ap@apartemeva.ru">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 4 10 8 10-8"/></svg>
+              ap@apartemeva.ru
+            </a>
+            <a href="https://t.me/apartemeva" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161l-1.97 9.293c-.145.658-.537.818-1.084.508l-3-2.211-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.93z"/></svg>
+              @apartemeva
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual fade-in">
+          <svg class="hero-arrow" viewBox="0 0 220 220" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="30" y1="110" x2="170" y2="110"/>
+            <line x1="40" y1="80" x2="170" y2="110"/>
+            <line x1="40" y1="140" x2="170" y2="110"/>
+            <line x1="55" y1="55" x2="190" y2="110"/>
+            <line x1="55" y1="165" x2="190" y2="110"/>
+            <polyline points="155,80 190,110 155,140"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <section class="cases" id="cases">
+    <div class="container">
+      <p class="section-label fade-in" data-ru="Кейсы" data-en="Cases">Кейсы</p>
+      <h2 class="section-title fade-in" data-ru="Проекты и результаты" data-en="Projects &amp; Results">Проекты и результаты</h2>
+
+      <!-- CASE 1 -->
+      <div class="case-card olive fade-in">
+        <div class="case-left">
+          <p class="case-number" data-ru="Кейс 01 &middot; Процессы и оптимизация" data-en="Case 01 &middot; Process &amp; Optimization">Кейс 01 &middot; Процессы и оптимизация</p>
+          <h3 class="case-card-title" data-ru="Масштабирование производства сторис: от хаоса к прозрачному конвейеру" data-en="Scaling Stories Production: From Chaos to a Transparent Pipeline">Масштабирование производства сторис: от хаоса к прозрачному конвейеру</h3>
+          <p class="case-company">Авито &middot; 2022 &middot; Project Manager</p>
+          <div class="case-tags">
+            <span class="case-tag">Jira</span>
+            <span class="case-tag">Confluence</span>
+            <span class="case-tag" data-ru="Регламенты" data-en="Regulations">Регламенты</span>
+          </div>
+        </div>
+        <div class="case-right">
+          <p class="case-section-label" data-ru="Ситуация" data-en="Situation">Ситуация</p>
+          <p data-ru="Редакторы перегружены, дизайн на аутсорсе, задачи в стороннем Trello. Нет единой точки входа — производство одной сторис занимало 4-5 недель." data-en="Editors overloaded, design outsourced, tasks scattered across external Trello. No single entry point — producing one story took 4-5 weeks.">Редакторы перегружены, дизайн на аутсорсе, задачи в стороннем Trello. Нет единой точки входа — производство одной сторис занимало 4-5 недель.</p>
+
+          <p class="case-section-label" data-ru="Действия" data-en="Actions">Действия</p>
+          <p data-ru="Сформировала выделенную редакцию и дизайн-юнит. Перевела всех в корпоративную Jira, внедрила шаблоны ТЗ. Вместе с дизайн-лидом создала гайды, описала регламенты в Confluence. Стала единственной точкой входа для заказчиков." data-en="Built a dedicated editorial team and design unit. Migrated everyone to corporate Jira with standardized briefs. Co-created design guides with the design lead, documented workflows in Confluence. Became the single point of contact for stakeholders.">Сформировала выделенную редакцию и дизайн-юнит. Перевела всех в корпоративную Jira, внедрила шаблоны ТЗ. Вместе с дизайн-лидом создала гайды, описала регламенты в Confluence. Стала единственной точкой входа для заказчиков.</p>
+
+          <div class="case-metrics">
+            <div class="metric">
+              <div class="metric-value">&times;7</div>
+              <p class="metric-label" data-ru="рост объёма" data-en="volume growth">рост объёма</p>
+            </div>
+            <div class="metric">
+              <div class="metric-value">5&rarr;2</div>
+              <p class="metric-label" data-ru="недели TTM" data-en="weeks TTM">недели TTM</p>
+            </div>
+            <div class="metric">
+              <div class="metric-value">100%</div>
+              <p class="metric-label" data-ru="задач в Jira" data-en="tasks in Jira">задач в Jira</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 2 -->
+      <div class="case-card green fade-in">
+        <div class="case-left">
+          <p class="case-number" data-ru="Кейс 02 &middot; Спасение XX млн ₽" data-en="Case 02 &middot; Saving XX M &#8381;">Кейс 02 &middot; Спасение XX млн ₽</p>
+          <h3 class="case-card-title" data-ru="Реализация рекламного спецпроекта для ТОП-банка за 48 часов" data-en="Delivering an Ad Campaign for a Top-3 Bank in 48 Hours">Реализация рекламного спецпроекта для ТОП-банка за 48 часов</h3>
+          <p class="case-company">Авито &middot; 2024 &middot; Project Manager</p>
+          <div class="case-tags">
+            <span class="case-tag" data-ru="Управление проектами" data-en="Project Management">Управление проектами</span>
+            <span class="case-tag" data-ru="Риск-менеджмент" data-en="Risk Management">Риск-менеджмент</span>
+            <span class="case-tag" data-ru="Переговоры" data-en="Negotiation">Переговоры</span>
+          </div>
+        </div>
+        <div class="case-right">
+          <p class="case-section-label" data-ru="Ситуация" data-en="Situation">Ситуация</p>
+          <p data-ru="Декабрь, конец финансового года. У продаж «горит» контракт с ТОП-3 банком на XX млн ₽ из-за нереализованных обязательств. Риск потери клиента." data-en="December, fiscal year-end. Sales team has a burning contract with a Top-3 bank worth XX M &#8381; due to unfulfilled commitments. Risk of losing the client.">Декабрь, конец финансового года. У продаж «горит» контракт с ТОП-3 банком на XX млн ₽ из-за нереализованных обязательств. Риск потери клиента.</p>
+
+          <p class="case-section-label" data-ru="Действия" data-en="Actions">Действия</p>
+          <p data-ru="Сформировала экстренную рабочую группу. Взяла на себя роль коммуникатора между продажами, юристами и креативом. Провела переговоры с заказчиком, защитив дизайн-решения — избежали 3+ кругов правок." data-en="Assembled an emergency task force. Took the role of communicator between sales, legal, and creative. Negotiated with the client, defending design decisions — avoided 3+ revision cycles.">Сформировала экстренную рабочую группу. Взяла на себя роль коммуникатора между продажами, юристами и креативом. Провела переговоры с заказчиком, защитив дизайн-решения — избежали 3+ кругов правок.</p>
+
+          <div class="case-result">
+            <p data-ru="Результат: XX млн ₽ выручки для компании, полное выполнение обязательств перед партнёром." data-en="Result: XX M &#8381; revenue for the company, full contract obligations fulfilled.">Результат: XX млн ₽ выручки для компании, полное выполнение обязательств перед партнёром.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 3 -->
+      <div class="case-card olive fade-in">
+        <div class="case-left">
+          <p class="case-number" data-ru="Кейс 03 &middot; A/B тестирование" data-en="Case 03 &middot; A/B Testing">Кейс 03 &middot; A/B тестирование</p>
+          <h3 class="case-card-title" data-ru="Разрешение продуктового конфликта через A/B тест и анализ данных" data-en="Resolving a Product Conflict via A/B Testing &amp; Data Analysis">Разрешение продуктового конфликта через A/B тест и анализ данных</h3>
+          <p class="case-company">Авито &middot; 2025 &middot; Project Manager</p>
+          <div class="case-tags">
+            <span class="case-tag">Trisigma</span>
+            <span class="case-tag">Redash</span>
+            <span class="case-tag">Figma</span>
+          </div>
+        </div>
+        <div class="case-right">
+          <p class="case-section-label" data-ru="Ситуация" data-en="Situation">Ситуация</p>
+          <p data-ru="Заказчики настаивали на фотографиях вместо иллюстраций. Продуктовые дизайнеры — за единообразие. Конфликт мнений без данных." data-en="Stakeholders insisted on photos over illustrations. Product designers advocated for visual consistency. Opinion-based conflict with no data.">Заказчики настаивали на фотографиях вместо иллюстраций. Продуктовые дизайнеры — за единообразие. Конфликт мнений без данных.</p>
+
+          <p class="case-section-label" data-ru="Действия" data-en="Actions">Действия</p>
+          <p data-ru="Организовала параллельное производство двух линеек контента. Самостоятельно настроила эксперимент в Trisigma, мониторила метрики 30 дней." data-en="Organized parallel production of two content lines. Independently set up an experiment in Trisigma, monitored metrics for 30 days.">Организовала параллельное производство двух линеек контента. Самостоятельно настроила эксперимент в Trisigma, мониторила метрики 30 дней.</p>
+
+          <div class="case-result">
+            <p data-ru="Инсайт: фото увеличили глубину просмотра, но снизили CTR кнопки на 3 п.п. Решение: иллюстрации на Главной, фото — на вертикалях. Конфликт разрешён данными." data-en="Insight: photos increased view depth but reduced button CTR by 3 pp. Decision: illustrations on the Homepage, photos on verticals. Conflict resolved with data.">Инсайт: фото увеличили глубину просмотра, но снизили CTR кнопки на 3 п.п. Решение: иллюстрации на Главной, фото — на вертикалях. Конфликт разрешён данными.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 4 -->
+      <div class="case-card green fade-in">
+        <div class="case-left">
+          <p class="case-number" data-ru="Кейс 04 &middot; Сезонный спецпроект" data-en="Case 04 &middot; Seasonal Special">Кейс 04 &middot; Сезонный спецпроект</p>
+          <h3 class="case-card-title" data-ru="Запуск спецпроекта «Итоги года на Авито» в сжатые сроки" data-en="Launching &laquo;Year in Review at Avito&raquo; Under Tight Deadlines">Запуск спецпроекта «Итоги года на Авито» в сжатые сроки</h3>
+          <p class="case-company">Авито &middot; 2024 &middot; Project Manager</p>
+          <div class="case-tags">
+            <span class="case-tag" data-ru="Управление проектами" data-en="Project Management">Управление проектами</span>
+            <span class="case-tag" data-ru="Риск-менеджмент" data-en="Risk Management">Риск-менеджмент</span>
+            <span class="case-tag">Creative Production</span>
+          </div>
+        </div>
+        <div class="case-right">
+          <p class="case-section-label" data-ru="Ситуация" data-en="Situation">Ситуация</p>
+          <p data-ru="Предновогодний период — 1 неделя вместо стандартных 2. Нет техвозможности для персонализации. Риск «скучного» контента." data-en="Pre-holiday period — 1 week instead of the standard 2. No technical capability for personalization. Risk of bland content.">Предновогодний период — 1 неделя вместо стандартных 2. Нет техвозможности для персонализации. Риск «скучного» контента.</p>
+
+          <p class="case-section-label" data-ru="Действия" data-en="Actions">Действия</p>
+          <p data-ru="Организовала кросс-функциональный сбор «wow-фактов» со всех вертикалей. Запустила параллельное производство текста и дизайна. Защитила спецпроектный визуальный стиль перед дизайн-лидом." data-en="Organized cross-functional collection of wow-facts across all verticals. Launched parallel text and design production. Defended a special visual style with the design lead.">Организовала кросс-функциональный сбор «wow-фактов» со всех вертикалей. Запустила параллельное производство текста и дизайна. Защитила спецпроектный визуальный стиль перед дизайн-лидом.</p>
+
+          <div class="case-metrics">
+            <div class="metric">
+              <div class="metric-value">1.05%</div>
+              <p class="metric-label" data-ru="CTR (vs 0.3% средн.)" data-en="CTR (vs 0.3% avg)">CTR (vs 0.3% средн.)</p>
+            </div>
+            <div class="metric">
+              <div class="metric-value">2.55</div>
+              <p class="metric-label" data-ru="глубина (vs 1.4 средн.)" data-en="depth (vs 1.4 avg)">глубина (vs 1.4 средн.)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 5 -->
+      <div class="case-card olive fade-in">
+        <div class="case-left">
+          <p class="case-number" data-ru="Кейс 05 &middot; Антикризисный менеджмент" data-en="Case 05 &middot; Crisis Management">Кейс 05 &middot; Антикризисный менеджмент</p>
+          <h3 class="case-card-title" data-ru="Ликвидация задолженности в XX млн ₽ и митигация юридических рисков" data-en="Clearing XX M &#8381; Debt &amp; Mitigating Legal Risks">Ликвидация задолженности в XX млн ₽ и митигация юридических рисков</h3>
+          <p class="case-company">Авито &middot; 2025 &middot; Project Manager</p>
+          <div class="case-tags">
+            <span class="case-tag" data-ru="Управление проектами" data-en="Project Management">Управление проектами</span>
+            <span class="case-tag" data-ru="Риск-менеджмент" data-en="Risk Management">Риск-менеджмент</span>
+            <span class="case-tag">Procurement</span>
+          </div>
+        </div>
+        <div class="case-right">
+          <p class="case-section-label" data-ru="Ситуация" data-en="Situation">Ситуация</p>
+          <p data-ru="Отсутствие владельца процесса выплат привело к задолженности перед партнёрами за N месяцев. Высокий риск судебных претензий и репутационного ущерба." data-en="Lack of a payment process owner led to partner debt spanning N months. High risk of lawsuits and reputational damage.">Отсутствие владельца процесса выплат привело к задолженности перед партнёрами за N месяцев. Высокий риск судебных претензий и репутационного ущерба.</p>
+
+          <p class="case-section-label" data-ru="Действия" data-en="Actions">Действия</p>
+          <p data-ru="Провела полную ревизию документов. Синхронизировала бухгалтерию и юристов. Согласовала с закупками проведение оплат сверх лимитов. Взяла на себя роль операционного менеджера от заявок до контроля транзакций." data-en="Conducted full document audit. Synchronized accounting and legal teams. Negotiated over-limit payments with procurement. Took on operations manager role from requests to transaction control.">Провела полную ревизию документов. Синхронизировала бухгалтерию и юристов. Согласовала с закупками проведение оплат сверх лимитов. Взяла на себя роль операционного менеджера от заявок до контроля транзакций.</p>
+
+          <div class="case-result">
+            <p data-ru="За 1.5 месяца долги погашены, судебные риски исключены, налажен регулярный цикл выплат." data-en="In 1.5 months: debts cleared, legal risks eliminated, regular payment cycle established.">За 1.5 месяца долги погашены, судебные риски исключены, налажен регулярный цикл выплат.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <p class="section-label fade-in" data-ru="Отзывы и рекомендации" data-en="Reviews &amp; Recommendations">Отзывы и рекомендации</p>
+      <h2 class="section-title fade-in" data-ru="Что говорят люди" data-en="What People Say">Что говорят люди</h2>
+
+      <div class="reviews-grid">
+        <!-- Review 1 -->
+        <div class="review-card fade-in">
+          <span class="review-category" data-ru="Коллеги" data-en="Colleagues">Коллеги</span>
+          <div class="review-header">
+            <div class="review-avatar">PB</div>
+            <div>
+              <div class="review-name">Polina Barsukova</div>
+              <div class="review-role">Senior PMM Авито Авто</div>
+            </div>
+          </div>
+          <p class="review-text" data-ru="Процессы были удобны и прозрачны. Получилось <strong>наладить процессы с каждой вертикалью</strong>, помогала командам достичь бизнес-целей, выстроить работу с 100+ заказчиками и учесть интересы всех. Отдельно отмечу <strong>оперативность решения вопросов</strong>." data-en="Processes were convenient and transparent. Managed to <strong>establish workflows with every vertical</strong>, helped teams achieve business goals, coordinated 100+ stakeholders. Especially notable was the <strong>speed of issue resolution</strong>.">Процессы были удобны и прозрачны. Получилось <strong>наладить процессы с каждой вертикалью</strong>, помогала командам достичь бизнес-целей, выстроить работу с 100+ заказчиками и учесть интересы всех. Отдельно отмечу <strong>оперативность решения вопросов</strong>.</p>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card fade-in">
+          <span class="review-category" data-ru="Коллеги" data-en="Colleagues">Коллеги</span>
+          <div class="review-header">
+            <div class="review-avatar">KK</div>
+            <div>
+              <div class="review-name">Karina Kyzlasova</div>
+              <div class="review-role">Senior PMM Авито Запчасти</div>
+            </div>
+          </div>
+          <p class="review-text" data-ru="Аня сделала всё, чтобы запуск был прозрачным: <strong>подробные инструкции, тренинги, консультации</strong>. Согласовывала всё быстрее дедлайнов, всегда шла навстречу. Аня — <strong>супернадёжный, живой и вовлечённый менеджер</strong>. С ней легко и круто работать." data-en="Anna did everything to make the launch transparent: <strong>detailed instructions, trainings, consultations</strong>. Always met deadlines ahead of schedule. Anna is a <strong>super reliable, engaged manager</strong>. Easy and great to work with.">Аня сделала всё, чтобы запуск был прозрачным: <strong>подробные инструкции, тренинги, консультации</strong>. Согласовывала всё быстрее дедлайнов, всегда шла навстречу. Аня — <strong>супернадёжный, живой и вовлечённый менеджер</strong>. С ней легко и круто работать.</p>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card fade-in">
+          <span class="review-category" data-ru="Партнёры" data-en="Partners">Партнёры</span>
+          <div class="review-header">
+            <div class="review-avatar">MC</div>
+            <div>
+              <div class="review-name">Matvey Cherkashyn</div>
+              <div class="review-role">Account Manager, Getblogger</div>
+            </div>
+          </div>
+          <p class="review-text" data-ru="Профессионализм на высоком уровне, все задачи забирались вовремя и делались оперативно. Взаимодействие в условиях <strong>жёстких дедлайнов было комфортным</strong>. Каждая из сторон находила компромисс." data-en="High level of professionalism, all tasks were picked up on time and completed promptly. Working under <strong>tight deadlines was comfortable</strong>. Both sides always found a compromise.">Профессионализм на высоком уровне, все задачи забирались вовремя и делались оперативно. Взаимодействие в условиях <strong>жёстких дедлайнов было комфортным</strong>. Каждая из сторон находила компромисс.</p>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review-card fade-in">
+          <span class="review-category" data-ru="Подрядчики" data-en="Contractors">Подрядчики</span>
+          <div class="review-header">
+            <div class="review-avatar">AS</div>
+            <div>
+              <div class="review-name">Artur Stotch</div>
+              <div class="review-role">Designer</div>
+            </div>
+          </div>
+          <p class="review-text" data-ru="ТЗ и гайды всегда были хорошо структурированы. <strong>Рабочий процесс лёгкий и душевный</strong>, но с профессиональным подходом. В кризисных ситуациях сохраняла спокойствие, помогала <strong>перераспределить тайминг</strong> и минимизировать срывы." data-en="Briefs and guides were always well-structured. <strong>The workflow was easy and warm</strong> yet professional. In crisis situations, stayed calm, helped <strong>redistribute timelines</strong> and minimize disruptions.">ТЗ и гайды всегда были хорошо структурированы. <strong>Рабочий процесс лёгкий и душевный</strong>, но с профессиональным подходом. В кризисных ситуациях сохраняла спокойствие, помогала <strong>перераспределить тайминг</strong> и минимизировать срывы.</p>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="review-card fade-in">
+          <span class="review-category" data-ru="Подрядчики" data-en="Contractors">Подрядчики</span>
+          <div class="review-header">
+            <div class="review-avatar">MK</div>
+            <div>
+              <div class="review-name">Maxim Kustov</div>
+              <div class="review-role">Account Group Head, Bonodigital</div>
+            </div>
+          </div>
+          <p class="review-text" data-ru="ТЗ всегда были очень понятными — чёткая задача, примеры визуализации. <strong>Быстрая обратная связь</strong>, понятные правки. Всегда хороший вайб и дружелюбный тон. В стрессовых моментах — <strong>спокойная и конструктивная коммуникация</strong>." data-en="Briefs were always clear — specific tasks, visual examples. <strong>Fast feedback</strong>, clear revisions. Always a good vibe and friendly tone. Under stress — <strong>calm and constructive communication</strong>.">ТЗ всегда были очень понятными — чёткая задача, примеры визуализации. <strong>Быстрая обратная связь</strong>, понятные правки. Всегда хороший вайб и дружелюбный тон. В стрессовых моментах — <strong>спокойная и конструктивная коммуникация</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="container">
+      <h2 class="cta-title fade-in" data-ru="Давайте работать вместе" data-en="Let's Work Together">Давайте работать вместе</h2>
+      <p class="cta-sub fade-in" data-ru="Открыта к предложениям и интересным проектам" data-en="Open to opportunities and interesting projects">Открыта к предложениям и интересным проектам</p>
+      <div class="cta-buttons fade-in">
+        <a href="https://t.me/apartemeva" class="cta-btn primary" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161l-1.97 9.293c-.145.658-.537.818-1.084.508l-3-2.211-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.93z"/></svg>
+          Telegram
+        </a>
+        <a href="mailto:ap@apartemeva.ru" class="cta-btn secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 4 10 8 10-8"/></svg>
+          ap@apartemeva.ru
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p data-ru="&copy; 2026 Анна Артемьева &middot; Санкт-Петербург" data-en="&copy; 2026 Anna Artemyeva &middot; Saint Petersburg">&copy; 2026 Анна Артемьева &middot; Санкт-Петербург</p>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // Burger menu
+    var burger = document.getElementById('burger');
+    var navLinks = document.getElementById('navLinks');
+    burger.addEventListener('click', function() {
+      burger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        burger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Fade-in on scroll
+    var faders = document.querySelectorAll('.fade-in');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    faders.forEach(function(el) { observer.observe(el); });
+
+    // Language switch
+    var currentLang = 'ru';
+    var langBtn = document.getElementById('langSwitch');
+    langBtn.addEventListener('click', function() {
+      currentLang = currentLang === 'ru' ? 'en' : 'ru';
+      langBtn.textContent = currentLang === 'ru' ? 'EN' : 'RU';
+      document.documentElement.lang = currentLang === 'ru' ? 'ru' : 'en';
+
+      document.querySelectorAll('[data-ru]').forEach(function(el) {
+        var text = el.getAttribute('data-' + currentLang);
+        if (text) el.innerHTML = text.replace(/\n/g, '<br>');
+      });
+    });
+  </script>
+</body>
+</html>
